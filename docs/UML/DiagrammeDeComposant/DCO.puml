@@ -1,0 +1,34 @@
+@startuml
+title SGC – Diagramme de composantes
+
+package "Maison Mère (Serveur Central)" {
+  [Interface Caisse] --> [CaisseService] : gRPC
+  [Interface Maison Mère] --> [MaisonMereService] : gRPC
+
+  [CaisseService] --> [StockService]
+  [CaisseService] --> [VenteService]
+  [CaisseService] --> [DemandeApprovisionnementService]
+  [CaisseService] --> [TransactionManager]
+  [CaisseService] --> [LoggingService]
+  
+  [MaisonMereService] --> [DemandeApprovisionnementService]
+  [MaisonMereService] --> [VenteService]
+  [MaisonMereService] --> [StockService]
+  [MaisonMereService] --> [LoggingService]
+
+  [StockService] --> [ProduitRepository]
+  [StockService] --> [DemandeApprovisionnementRepository]
+
+  [VenteService] --> [VenteRepository]
+  [VenteService] --> [TransactionManager]
+
+  [DemandeApprovisionnementService] --> [DemandeApprovisionnementRepository]
+
+  [ProduitRepository] --> [Pool de Connexions]
+  [VenteRepository] --> [Pool de Connexions]
+  [DemandeApprovisionnementRepository] --> [Pool de Connexions]
+
+  [Pool de Connexions] --> [Base de données PostgreSQL]
+}
+
+@enduml

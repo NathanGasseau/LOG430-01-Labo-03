@@ -1,0 +1,61 @@
+@startuml SGC
+
+title Système de Gestion de Caisse (SGC) - Architecture de Déploiement
+
+node "Maison Mère (Serveur Central)" {
+  node "Serveur Django Monolithique" {
+    component "CaisseService"
+    component "MaisonMereService"
+    component "StockService"
+    component "VenteService"
+    component "DemandeApprovisionnementService"
+    component "RapportService"
+    
+    component "ProduitRepository"
+    component "VenteRepository"
+    component "DemandeApprovisionnementRepository"
+    component "TransactionManager"
+    component "LoggingService" <<library>>
+    component "Pool de Connexions" <<connector>>
+  }
+
+  node "Serveur Base de Données" {
+    database "Base de données PostgreSQL" as DB
+  }
+}
+
+node "Poste de travail N" {
+  node "Interface Caisse N" {
+    component "Client Console"
+  }
+}
+
+node "Poste Maison Mère" {
+  node "Interface" {
+    component "Interface Web Maison Mère"
+  }
+}
+
+"Client Console" --> "CaisseService" : appels directs (gRPC)
+"Interface Web Maison Mère" --> "MaisonMereService" : accès distant (gRPC)
+
+"CaisseService" --> "StockService"
+"CaisseService" --> "VenteService"
+"CaisseService" --> "DemandeApprovisionnementService"
+"CaisseService" --> "TransactionManager"
+"CaisseService" --> "LoggingService"
+
+"MaisonMereService" --> "StockService"
+"MaisonMereService" --> "VenteService"
+"MaisonMereService" --> "RapportService"
+
+"StockService" --> "ProduitRepository"
+"VenteService" --> "VenteRepository"
+"DemandeApprovisionnementService" --> "DemandeApprovisionnementRepository"
+
+"ProduitRepository" --> "Pool de Connexions"
+"VenteRepository" --> "Pool de Connexions"
+"DemandeApprovisionnementRepository" --> "Pool de Connexions"
+"Pool de Connexions" --> DB
+
+@enduml
