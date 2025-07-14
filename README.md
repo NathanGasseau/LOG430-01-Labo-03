@@ -26,14 +26,14 @@ L'application utilise PostgreSQL comme base de données centrale, avec un **pool
 Prérequis : [Docker](https://www.docker.com/) et [docker-compose](https://docs.docker.com/compose/)
 
 ```bash
-git clone https://github.com/NathanGasseau/LOG430-01-Labo-02.git
+git clone https://github.com/NathanGasseau/LOG430-01-Labo-03.git
 cd LOG430-01-Labo-02
 docker-compose up --build
 ```
 
 Accéder à l’application :  
 [http://localhost:8000](http://localhost:8000)  
-Ou : [http://IP-DE-LA-VM:8000](http://IP-DE-LA-VM:8000) si lancé depuis une VM distante.
+Ou : [http://10.194.32.191:8000](http://10.194.32.191:8000) si lancé depuis une VM distante.
 
 ---
 
@@ -48,8 +48,8 @@ Prérequis :
 
 ```bash
 # Cloner et installer
-git clone https://github.com/NathanGasseau/LOG430-01-Labo-02.git
-cd LOG430-01-Labo-02
+git clone https://github.com/NathanGasseau/LOG430-01-Labo-03.git
+cd LOG430-01-Labo-03
 python3 -m venv venv
 source venv/bin/activate  # (Sous Windows: venv\Scripts\activate)
 pip install -r requirements.txt
@@ -67,28 +67,45 @@ Accéder à l’application : [http://127.0.0.1:8000](http://127.0.0.1:8000)
 ### 📁 Structure du projet Django  
 
 ```
-LOG430-01-Labo-02/
+LOG430-01-Labo-03/
 │
-├── sgc/             # Répertoire du projet Django
-│   ├── settings.py          # Configuration du projet
+├── api/                     # Application exposant les endpoints REST
+│   ├── controllers.py       # Contrôleurs RESTful
+│   ├── authentication.py    # Gestion de l’authentification
+│   ├── urls.py              # Routes de l’API
+│   └── ...
+│
+├── sgc/                     # Répertoire du projet Django principal
+│   ├── settings.py          # Configuration Django
 │   ├── urls.py              # Routes principales
+│   ├── views.py             # Vues principales
+│   ├── caisse/              # Application métier – caisse
+│   │   ├── services/        # Logique métier (CaisseService, etc.)
+│   │   ├── urls.py
+│   │   └── ...
+│   ├── core/                # Domaine principal : modèles et services
+│   │   ├── models.py
+│   │   ├── repositories/
+│   │   ├── services/
+│   │   └── ...
+│   ├── maison_mere/         # Application maison mère
+│   │   ├── views.py
+│   │   └── ...
+│   ├── templates/           # Fichiers HTML (interface ou emails)
+│   │   ├── accueil.html
+│   │   └── menu.html
 │   └── ...
 │
-├── caisse/                  # Application Django principale
-│   ├── models.py            # Modèles de données (Produit, Vente, etc.)
-│   ├── views.py             # Logique des vues / API
-│   ├── services/            # Logique métier (StockService, etc.)
-│   ├── templates/           # Fichiers HTML (si UI)
-│   └── ...
+├── docs/                    # Documentation technique
+│   ├── ADR/                 # Architecture Decision Records
+│   └── UML/                 # Diagrammes UML
 │
-├── db/
-│   └── init_postgres.sql    # Script de création des tables PostgreSQL
-│
-├── docker-compose.yml       # Configuration Docker multi-services
-├── Dockerfile               # Image Docker Django
-├── manage.py                # Entrée principale Django
-├── requirements.txt         # Dépendances python3
-└── README.md                # Ce fichier
+├── docker-compose.yml       # Orchestration multi-services
+├── Dockerfile               # Image Docker de l’application
+├── manage.py                # Entrée Django
+├── requirements.txt         # Dépendances Python
+├── README.md                # Fichier d’instructions
+└── venv/                    # Environnement virtuel Python (local)
 ```
 
 ---
