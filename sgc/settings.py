@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'sgc.maison_mere',
     'sgc.core',
     'django_extensions',
+    'rest_framework',
+    'api',
+    'drf_yasg',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'sgc.urls'
@@ -109,6 +115,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# CORS (Cross-Origin Resource Sharing) settings
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # frontend local
+    "https://tonfrontend.com",  # en prod
+]
+
+# Authentification APIAPI_TOKEN = "ma-cle-api-super-secrete-123"
+API_TOKEN = "ma-cle-api-super-secrete-123"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

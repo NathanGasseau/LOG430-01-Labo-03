@@ -11,10 +11,10 @@
         <ul class="nav nav-pills">
             <li class="nav-item"><a class="nav-link" href="{% url 'rechercher_produit' %}">Produits</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'enregistrer_vente' %}">Nouvelle vente</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'gerer_retour' %}">Retour</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'consulter_stock_magasin' %}">Stock magasin</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'consulter_stock_central' %}">Stock central</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'demande_approvisionnement' %}">Demande approvisionnement</a></li>
+
+            <!-- Liens vers Swagger UI et Redoc -->
+            <li class="nav-item"><a class="nav-link" href="{% url 'schema-swagger-ui' %}">📘 Swagger UI</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'schema-redoc' %}">📕 ReDoc</a></li>
         </ul>
     </nav>
 

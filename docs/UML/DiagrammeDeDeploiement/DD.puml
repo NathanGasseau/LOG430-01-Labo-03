@@ -1,16 +1,19 @@
 @startuml SGC
 
-title Système de Gestion de Caisse (SGC) - Architecture de Déploiement
+title Système de Gestion de Caisse (SGC) - Architecture de Déploiement (API REST)
 
 node "Maison Mère (Serveur Central)" {
   node "Serveur Django Monolithique" {
+    component "Interface API REST" <<REST>>
+    component "REST Controller Layer" <<controller>>
+
     component "CaisseService"
     component "MaisonMereService"
     component "StockService"
     component "VenteService"
     component "DemandeApprovisionnementService"
     component "RapportService"
-    
+
     component "ProduitRepository"
     component "VenteRepository"
     component "DemandeApprovisionnementRepository"
@@ -26,18 +29,26 @@ node "Maison Mère (Serveur Central)" {
 
 node "Poste de travail N" {
   node "Interface Caisse N" {
-    component "Client Console"
+    component "Client Console" <<HTTP client>>
   }
 }
 
 node "Poste Maison Mère" {
   node "Interface" {
-    component "Interface Web Maison Mère"
+    component "Interface Web Maison Mère" <<HTTP client>>
   }
 }
 
-"Client Console" --> "CaisseService" : appels directs (gRPC)
-"Interface Web Maison Mère" --> "MaisonMereService" : accès distant (gRPC)
+"Client Console" --> "Interface API REST" : HTTP/JSON
+"Interface Web Maison Mère" --> "Interface API REST" : HTTP/JSON
+
+"Interface API REST" --> "REST Controller Layer"
+"REST Controller Layer" --> "CaisseService"
+"REST Controller Layer" --> "MaisonMereService"
+"REST Controller Layer" --> "StockService"
+"REST Controller Layer" --> "VenteService"
+"REST Controller Layer" --> "DemandeApprovisionnementService"
+"REST Controller Layer" --> "RapportService"
 
 "CaisseService" --> "StockService"
 "CaisseService" --> "VenteService"
@@ -59,3 +70,4 @@ node "Poste Maison Mère" {
 "Pool de Connexions" --> DB
 
 @enduml
+s

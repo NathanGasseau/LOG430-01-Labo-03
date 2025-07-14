@@ -19,7 +19,9 @@
   <h3 class="mt-4">Résultats :</h3>
   <ul class="list-group">
     {% for produit in produits %}
-      <li class="list-group-item">{{ produit.nom }} – {{ produit.categorie.nom }} – {{ produit.prix }}$</li>
+      <li class="list-group-item">
+        {{ produit.nom }} – {{ produit.categorie }} – {{ produit.prix }}$
+      </li>
     {% endfor %}
   </ul>
 {% elif criteres.nom or criteres.categorie or criteres.id %}

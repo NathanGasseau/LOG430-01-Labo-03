@@ -1,9 +1,12 @@
 @startuml
-title SGC – Diagramme de composantes
+title SGC – Diagramme de composantes (REST seulement)
 
 package "Maison Mère (Serveur Central)" {
-  [Interface Caisse] --> [CaisseService] : gRPC
-  [Interface Maison Mère] --> [MaisonMereService] : gRPC
+
+  [Interface API REST] --> [REST Controller Layer] : HTTP/JSON
+
+  [REST Controller Layer] --> [CaisseService]
+  [REST Controller Layer] --> [MaisonMereService]
 
   [CaisseService] --> [StockService]
   [CaisseService] --> [VenteService]
@@ -20,7 +23,6 @@ package "Maison Mère (Serveur Central)" {
   [StockService] --> [DemandeApprovisionnementRepository]
 
   [VenteService] --> [VenteRepository]
-  [VenteService] --> [TransactionManager]
 
   [DemandeApprovisionnementService] --> [DemandeApprovisionnementRepository]
 
