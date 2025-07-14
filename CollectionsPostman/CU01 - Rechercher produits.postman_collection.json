@@ -1,0 +1,48 @@
+{
+	"info": {
+		"_postman_id": "6392bd0f-77d8-46c5-adab-28c22ffbd97c",
+		"name": "CU01 - Rechercher produits",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31367754"
+	},
+	"item": [
+		{
+			"name": "http://10.194.32.191:8000/api/v1/produits/recherche/?id=1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token ma-cle-api-super-secrete-123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://10.194.32.191:8000/api/v1/produits/recherche/?id=1",
+					"protocol": "http",
+					"host": [
+						"10",
+						"194",
+						"32",
+						"191"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"produits",
+						"recherche",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
