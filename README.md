@@ -108,9 +108,3 @@ LOG430-01-Labo-03/
 └── venv/                    # Environnement virtuel Python (local)
 ```
 
----
-
-### 💡 Remarques  
-- Le projet suit une architecture **monolithique modulaire**.  
-- Des composants comme `CaisseService` ou `MaisonMereService` orchestrent les opérations métiers.  
-- L’interface employé est en ligne de commande, mais l’extension vers une UI web est envisageable.
